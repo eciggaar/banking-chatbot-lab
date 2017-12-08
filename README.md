@@ -10,49 +10,39 @@ Always wanted to know how to build your own banking chatbot? This workshop shows
 At the end of the workshop you have a bot capable of handling greetings, block your card and handle any other topic that you want your bot to be able to deal with.
 
 ## Before you begin
-To be able to use the Watson APIs, you need to have an IBM Cloud account. Your account must have enough resources available to create one service.
+To use the Watson APIs, you need to have an IBM Cloud account. Your account must have enough resources available to create at least two services, one for the chatbot and one that -- under the surface -- automates the deployment of your bot.
 
-## Step 1: Create a Watson Conversation service
+## Step 1: Import the banking demo bot into your own cloud environment
 
-To start with your bot, you need to create a new instance of the Conversation service and launch the tool. For this, make sure that you're logged in to IBM Cloud. Next,
+1. Click the `Get this bot` link below to get the banking demo bot into your own cloud environment.
 
-1. Use Ctrl-click (or the equivalent action for your system) to open the [service creation pane](https://console.eu-gb.bluemix.net/catalog/services/conversation?taxonomyNavigation=apps) in a separate tab.
+  <a href="https://console.bluemix.net/devops/setup/deploy?repository=https%3A//github.com/IBM/chatbot-deployer&chatbotName=Demo%20Banking%20Bot&chatbotWorkspaceURL=https://ibm.box.com/shared/static/rj2r8gf8vjdhc1o5x7rkynnsv1csjgry.json"><img src="https://github.com/eciggaar/banking-chatbot-lab/blob/master/readmeimages/get-this-bot.png?raw=true" width="150"></a>
 
-2. In the **Service name** field, specify `conversation-service`.
+2. When prompted, login to IBM Cloud. Next, click **Create** to actually start the creation.
 
-![Create service][1]
+  ![Create pipeline][1]
 
-3. Click **Create**.
+3. To open the Conversation Tooling environment, click the conversation tile. You should now see your dashboard with a conversation service called `Bot Asset Exchange Workspaces`.
 
-4. Finally, on the **Service Details** page, click **Launch tool** to open the Conversation Tooling.  
+  ![Open Conversation tile][2]
 
-![Launch tool][2]
+4. Click this service and then click **Launch tool**.
 
-## Step 2: Import a workspace
+  ![Launch tool][3]
 
-A _workspace_ is a container for all the artifacts that define the behavior of your bot. To make life a bit easier for you, we've included a sample workspace to give your bot a jump-start. The steps below describe how to import this workspace into your service.
+5. In the available workspaces, select the **Banking Demo Bot** to start working with your bot.
 
-1. Use Ctrl-click (or the equivalent action for your system) to open the <a href="https://ibm.box.com/v/demo-banking-workspace" target=download>sample workspace</a> JSON file in a separate tab. Click **Download** to download this file to your own device.
+  ![Select workspace][4]
 
-  ![Download workspace][3]
+## Step 2: Defining a new intent for the bot
 
-2. If not already done, open the `conversation-service` service that you created in [Step 1](#step-1-create-a-watson-conversation-service) and click on **Launch tool** to open the Watson Conversation Tooling.
-
-3. Click the import button and upload the file `demo_banking_workspace.json` that you downloaded in the first step of this section.
-
-  ![Import JSON][4]
-
-You now successfully imported a sample workspace into your service. Next, the bot's functionality can be extended by defining more intents and entities. These will then be included into the bot's dialog.
-
-## Step 3: Adding a new intent
-
-An intent is a purpose or goal expressed in the user's input, e.g. answering a question, change turning on an appliance in your car. By recognizing the intent expressed in the user's input, the Watson Conversation service can choose the correct dialog branch for responding to it.
+An intent is a purpose or goal expressed in the user's input, e.g. the user wants to report a lost card and take action.
 
 1. After the successful import in the previous section, you should see the following screen in front of you.
 
 ![Imported workspace][12]
 
-2. On the Intents tab, select **Create new** and add the following intent name: `kaart_kwijt`. This intent indicates that the user lost their card and wants the bank to take action and block it.
+2. On the Intents tab, select **Add intent** and add the following intent name: `kaart_kwijt`. This intent indicates that the user lost their card and wants the bank to block it.
 
 ![Workspace intents][5]
 
@@ -61,7 +51,7 @@ An intent is a purpose or goal expressed in the user's input, e.g. answering a q
 4. Add these 4 more examples to help Watson recognize the `#kaart_kwijt` intent and hit Enter:
 ```
   Ik heb geen idee waar mijn bankpas is
-  Ik ben mijn credit card verloren
+  Ik ben mijn creditcard verloren
   Mijn pinpas is weg.
   Ik ben bang dat ik mijn credit card verloren ben.
 ```
@@ -89,8 +79,6 @@ The `@card` entity represents the different card types that the bot can handle.
     * Synonym: `maestro`.
 
     * Synonym: `pinpas`.
-
-    * Synonym: `betaalpas`.
 
 You defined one entity `@card` with two values -- representing the supported card types. The next section will explain how you can extend the existing dialog to use these intents and entities and to define the correct response.
 
@@ -218,6 +206,8 @@ If the bot fails to recognize the correct intent, you can retrain it directly fr
 
 **Tip**: Don't include the `#` character when you type the intent name.
 
+**Congratulations!!** You've built your own bot in a snap!! :smiley: :smiley:
+
 ### What to do next
 
 Now that your bot is complete, you can experiment by enhancing it with new functions. For example:
@@ -227,61 +217,18 @@ Now that your bot is complete, you can experiment by enhancing it with new funct
 * Add a new intent to turn off appliances
 * Add capability for turning on music and specifying a musical genre with a single command
 
-## Step 6: _(Optional)_ - deploy a sample application to host your bot
-
-To see your bot live in action, using a sample NodeJS application, press Ctrl-click (or the equivalent for your system) to open the button below in a separate tab. This deployment sets up a delivery pipeline for which the Continues Delivery service is created. Until now, this service is only available in the US region of Bluemix.
-
-To make sure you have a space in this region as well, use Ctrl-click to open the [dashboard](https://console.ng.bluemix.net/login) of this region. If you are all OK, you get the dashboard. Otherwise, you will be asked to create your first space in this region -- as depicted in the screenshot below.
-
-![Create space in US][16]
-
-Use Ctrl-click (or the equivalent for your system) to open the deploy-to button below in a separate tab.
-
-[![Deploy to Bluemix](https://deployment-tracker.mybluemix.net/stats/a3a41102a5d277cce1b65b7b1dc018e8/button.svg)](https://bluemix.net/deploy?repository=https://github.com/eciggaar/botmaster-watsonconversation-socketio.git)
-
-In the **Delivery Pipline** section, choose the `United Kingdom (Production)` as region and select the space where you deployed your Watson Conversation service to (most likely `dev`).
-
-![Select region][17]
-
-Click **Deploy** to start the deployment. You can check the deployment by clicking the Delivery Pipeline tile in the toolchain.
-
-![Select delivery pipeline][18]
-
-Once the **Deploy Stage** is also successfully completed, select the URL to view your app.
-
-![View app][19]
-
-**Congratulations!!** You've built your own bot in a snap!! :smiley: :smiley:
-
-## License
-
-  The sample code which is deployed via the **Deploy to Bluemix** button is licensed under Apache 2.0. Full license text is available in [LICENSE](LICENSE).
-
-## Privacy Notice
-
-The node sample web application, that is deployed for you when clicking the **Deploy to Bluemix** button, includes code to track deployments to Bluemix and other Cloud Foundry platforms. The following information is sent to a Deployment Tracker service on each deployment:
-
-* Application Name (`application_name`)
-* Space ID (`space_id`)
-* Application Version (`application_version`)
-* Application URIs (`application_uris`)
-
-This data is collected from the `VCAP_APPLICATION` environment variable in IBM Bluemix and other Cloud Foundry platforms. This data is used by IBM to track metrics around deployments of sample applications to IBM Bluemix. Only deployments of sample applications that include code to ping the Deployment Tracker service will be tracked.
-
-### Disabling Deployment Tracking
-
-Deployment tracking can be disabled by removing `require('cf-deployment-tracker-client').track();` from the beginning of the `app.js` file at the root of its repo.
-
 ## Additional Links
 
 * Botmaster Documentation : [Botmaster Documentation](http://botmasterai.com/)
 * Watson Conversation Documentation : [Watson Conversation](http://www.ibm.com/watson/developercloud/doc/conversation/index.html)
 * Watson Conversation Tutorial: [Watson Tutorial](https://www.ibm.com/watson/developercloud/doc/conversation/tutorial.html)
 
-[1]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/create-service.png?raw=true
-[2]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/launch-tool.png?raw=true
-[3]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/download.png?raw=true
-[4]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/import-json.png?raw=true
+[1]: https://github.com/eciggaar/banking-chatbot-lab/blob/master/readmeimages/create-pipeline.png?raw=true
+[2]: https://github.com/eciggaar/banking-chatbot-lab/blob/master/readmeimages/open-conversation.png?raw=true
+[3]: https://github.com/eciggaar/banking-chatbot-lab/blob/master/readmeimages/launch-tool.png?raw=true
+[4]: https://github.com/eciggaar/banking-chatbot-lab/blob/master/readmeimages/select-workspace.png?raw=true
+
+
 [5]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/intents.png?raw=true
 [6]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/close.png?raw=true
 [7]: https://github.com/eciggaar/chatbot-lab/blob/master/readmeimages/options.png?raw=true
