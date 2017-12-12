@@ -14,27 +14,29 @@ To use the Watson APIs, you need to have an IBM Cloud account. Your account must
 
 ## Step 1: Import the banking demo bot into your own cloud environment
 
-1. Click the `Get this bot` link below to get the banking demo bot into your own cloud environment.
+1. First you need to login to IBM Cloud. For this ctrl-click [Login to IBM Cloud](https://console.bluemix.net/login) to open the login page in a separate tab. Then, login using the userid and password provided to your team.
+
+2. Next, ctrl-click the `Get this bot` link below to get the banking demo bot into your own cloud environment. This will open the deployment page in a separate tab.
 
   <a href="https://console.bluemix.net/devops/setup/deploy?repository=https%3A//github.com/IBM/chatbot-deployer&chatbotName=Demo%20Banking%20Bot&chatbotWorkspaceURL=https://ibm.box.com/shared/static/rj2r8gf8vjdhc1o5x7rkynnsv1csjgry.json"><img src="https://github.com/eciggaar/banking-chatbot-lab/blob/master/readmeimages/get-this-bot.png?raw=true" width="225"></a>
 
-2. When prompted, login to IBM Cloud. Next, click **Create** to actually start the creation.
+3. Then, click **Create** to actually start the creation.
 
   ![Create pipeline][1]
 
-3. To open the Conversation Tooling environment, click the conversation tile.
+4. To open the Conversation Tooling environment, click the conversation tile.
 
   ![Open Conversation tile][2]
 
-4. You should now see your dashboard with a conversation service called `Bot Asset Exchange Workspaces`.
+5. You should now see your dashboard with a conversation service called `Bot Asset Exchange Workspaces`. It might take a little while to get fully instantiated so refresh the page a couple of times if it does not show.
 
   ![Select service][5]
 
-5. Click this service and then click **Launch tool**.
+6. Click this service and then click **Launch tool**. Finally, click the **Login with IBM ID** button to go to the chatbot construction area.
 
   ![Launch tool][3]
 
-6. In the available workspaces, select the **Banking Demo Bot** to start working with your bot.
+7. In the available workspaces, select the **Banking Demo Bot** to start working with your bot.
 
   ![Select workspace][4]
 
@@ -104,17 +106,19 @@ Now we are going to extend the dialog by adding a branch that responds to the `#
 
 For this, we start by creating the root-level node:
 
-1. Click the **options** icon ![Options][12] on the right-hand side of the `#greeting` node and select **Add node below** to create a new root-level node.
+1. First, switch to the dialog section by clicking the dialog tab.
 
-2. In the **Name this node** field, enter `Kaart kwijt`. The title does not affect the processing of the node, but it makes it easier to find.
+2. Next,click the **options** icon ![Options][12] on the right-hand side of the `#greeting` node and select **Add node below** to create a new root-level node.
 
-3. In the edit view, in the **If bot recognizes** field, start typing `#kaart_kwijt`.
+3. In the **Name this node** field, enter `Kaart kwijt`. The title does not affect the processing of the node, but it makes it easier to find.
 
-4. Select **#kaart_kwijt** from the list. This condition is triggered by any input that matches the `#kaart_kwijt` intent.
+4. In the edit view, in the **If bot recognizes** field, start typing `#kaart_kwijt`.
 
-5. Next, in the **Then respond with** field, type the sentence the bot needs to respond with when this intent is recognized. For example, type `Dat is vervelend om te horen zeg....we zullen direct de kaart voor u blokkeren.`.
+5. Select **#kaart_kwijt** from the list. This condition is triggered by any input that matches the `#kaart_kwijt` intent.
 
-5. Click ![Close][13] to continue.
+6. Next, in the **Then respond with** field, type the sentence the bot needs to respond with when this intent is recognized. For example, type `Dat is vervelend om te horen zeg....we zullen direct de kaart voor u blokkeren.`.
+
+7. Click ![Close][13] to continue.
 
 ### Test the dialog
 In this section we'll test the conversation via the chat pane.
